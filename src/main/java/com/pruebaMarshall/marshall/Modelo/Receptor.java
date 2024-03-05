@@ -60,4 +60,10 @@ public class Receptor {
     public Receptor(){
         
     }
+    @Override
+    public String toString() {
+        return "Receptor [Rfc=" + Rfc + ", Nombre=" + Nombre + ", UsoCFDI=" + UsoCFDI + ", DomicilioFiscalReceptor="
+                + DomicilioFiscalReceptor + ", RegimenFiscalReceptor=" + RegimenFiscalReceptor + "]";
+    }
+
 }

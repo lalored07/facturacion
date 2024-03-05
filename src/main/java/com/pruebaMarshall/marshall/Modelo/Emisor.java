@@ -42,6 +42,10 @@ public class Emisor {
         Nombre = nombre;
         RegimenFiscal = regimenFiscal;
     }
+    @Override
+    public String toString() {
+        return "Emisor [Rfc=" + Rfc + ", Nombre=" + Nombre + ", RegimenFiscal=" + RegimenFiscal + "]";
+    }
 
     
     

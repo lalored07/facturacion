@@ -3,6 +3,7 @@ package com.pruebaMarshall.marshall.Modelo;
 import jakarta.xml.bind.annotation.XmlAnyAttribute;
 import jakarta.xml.bind.annotation.XmlAttribute;
 
+
 public class CFDI {
     private Comprobante Comprobante;
     private CfdiRelacionados CfdiRelacionados;

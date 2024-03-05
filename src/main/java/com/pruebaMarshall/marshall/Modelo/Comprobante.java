@@ -15,7 +15,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Comprobante {
     
-    protected String Certificado;
+    private String Certificado;
     private String noCertificado;
     private String sello;
     private String tipoDeComprobante;
@@ -35,41 +35,25 @@ public class Comprobante {
     private CfdiRelacionados CfdiRelacionados;
     private Emisor Emisor;
     private Receptor Receptor;
-
+    private Conceptos Conceptos;
+    private Impuestos Impuestos;
+    private Complemento Complemento;
+    private String nombre;
     public Comprobante() {}
 
-    public Comprobante(String certificado, String noCertificado, String sello, String tipoDeComprobante, String exportacion, String version,
-            String serie, String folio, String total, String subTotal, String fecha, String moneda, String lugarExpedicion,
-            String metodoPago, String formaPago, String descuento, String condicionesDePago, CfdiRelacionados cfdiRelacionados, Emisor Emisor, Receptor Receptor) {
-        this.Certificado = certificado;
-        this.noCertificado = noCertificado;
-        this.sello = sello;
-        this.tipoDeComprobante = tipoDeComprobante;
-        this.exportacion = exportacion; 
-        this.version = version;
-        this.serie = serie;
-        this.folio = folio;
-        this.total = total;
-        this.subTotal = subTotal;
-        this.fecha = fecha;
-        this.moneda = moneda;
-        this.lugarExpedicion = lugarExpedicion;
-        this.metodoPago = metodoPago;
-        this.formaPago = formaPago;
-        this.descuento = descuento;
-        this.condicionesDePago = condicionesDePago;
-        this.CfdiRelacionados = cfdiRelacionados;
-        this.Emisor = Emisor;
-        this.Receptor = Receptor;
-            }
+    
    
-            public Comprobante(String certificado, String noCertificado, String sello, CfdiRelacionados cfdiRelacionados, Emisor Emisor, Receptor Receptor) {
+            public Comprobante(String certificado, String noCertificado, String sello, String exportacion, CfdiRelacionados cfdiRelacionados, Emisor Emisor, Receptor Receptor, Conceptos Conceptos, Impuestos Impuestos, Complemento Complemento) {
                 Certificado = certificado;
                 this.noCertificado = noCertificado;
                 this.sello = sello;
+                this.exportacion = exportacion;
                 this.CfdiRelacionados = cfdiRelacionados;
                 this.Emisor = Emisor;
                 this.Receptor = Receptor;
+                this.Conceptos = Conceptos;
+                this.Impuestos = Impuestos;
+                this.Complemento = Complemento;
             }        
    
     
@@ -218,21 +202,13 @@ public class Comprobante {
         this.condicionesDePago = condicionesDePago;
     }
 
-    @XmlAttribute(name = "exportacion")
+    @XmlAttribute(name = "Exportacion")
     public String getExportacion() {
         return exportacion;
     }
 
     public void setExportacion(String exportacion) {
         this.exportacion = exportacion;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Comprobante [Certificado=" + Certificado + ", noCertificado=" + noCertificado + ", sello=" + sello
-                + ", CfdiRelacionados=" + CfdiRelacionados + "]";
     }
 
     public CfdiRelacionados getCfdiRelacionados() {
@@ -261,6 +237,63 @@ public class Comprobante {
     public void setReceptor(Receptor receptor) {
         Receptor = receptor;
     }
+
+
+    public Conceptos getConceptos() {
+        return Conceptos;
+    }
+
+    @XmlElement(name = "Conceptos", namespace = NAMESPACES.CFDI)
+    public void setConceptos(Conceptos conceptos) {
+        Conceptos = conceptos;
+    }
+
+    public Impuestos getImpuestos() {
+        return Impuestos;
+    }
+
+    @XmlElement(name = "Impuestos", namespace = NAMESPACES.CFDI)
+    public void setImpuestos(Impuestos impuestos) {
+        Impuestos = impuestos;
+    }
+
+    public Complemento getComplemento() {
+        return Complemento;
+    }
+
+    @XmlElement(name = "Complemento", namespace = NAMESPACES.CFDI)
+    public void setComplemento(Complemento complemento) {
+        Complemento = complemento;
+    }
+
+    
+
+    @Override
+    public String toString() {
+        return "Comprobante [Certificado=" + Certificado + ", noCertificado=" + noCertificado + ", sello=" + sello
+                + ", tipoDeComprobante=" + tipoDeComprobante + ", exportacion=" + exportacion + ", version=" + version
+                + ", serie=" + serie + ", folio=" + folio + ", total=" + total + ", subTotal=" + subTotal + ", fecha="
+                + fecha + ", moneda=" + moneda + ", lugarExpedicion=" + lugarExpedicion + ", metodoPago=" + metodoPago
+                + ", formaPago=" + formaPago + ", descuento=" + descuento + ", condicionesDePago=" + condicionesDePago
+                + ", CfdiRelacionados=" + CfdiRelacionados + ", Emisor=" + Emisor + ", Receptor=" + Receptor
+                + ", Conceptos=" + Conceptos + ", Impuestos=" + Impuestos + ", Complemento=" + Complemento + "]";
+    }
+
+
+
+    public String getNombre() {
+        return nombre;
+    }
+
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+    
+    
 
     
     
