@@ -99,6 +99,22 @@ public class MarshallCFDI {
         return subTotales;
     }
 
+    public List<String> obtenerFecha(){
+        List<String> fechas = new ArrayList<>();
+        for(Comprobante comprobante : comprobante){
+            fechas.add(comprobante.getFecha());
+        }
+        return fechas;
+    }
+
+    public List<String> obtenerMoneda(){
+        List<String> monedas = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            monedas.add(comprobante.getMoneda());
+        }
+        return monedas;
+    }
+
     public List<CfdiRelacionados> obtenerCfdiRelacionados() {
         List<CfdiRelacionados> cfdiRelacionadosList = new ArrayList<>();
         for (Comprobante comprobante : comprobante) {
@@ -106,6 +122,8 @@ public class MarshallCFDI {
         }
         return cfdiRelacionadosList;
     }
+
+
 
     public List<Emisor> obtenerEmisores() {
         List<Emisor> emisores = new ArrayList<>();
