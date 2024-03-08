@@ -115,6 +115,22 @@ public class MarshallCFDI {
         return monedas;
     }
 
+    public List<String> obtenerFormaPago(){
+        List<String> formaPago = new ArrayList<>();
+        for (Comprobante comprobante: comprobante) {
+            formaPago.add(comprobante.getFormaPago());
+        }
+        return formaPago;
+    }
+
+    public List<String> obtenerMetodoPago(){
+        List<String> metodoPago = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            metodoPago.add(comprobante.getMetodoPago());
+        }    
+        return metodoPago;
+    }
+
     public List<CfdiRelacionados> obtenerCfdiRelacionados() {
         List<CfdiRelacionados> cfdiRelacionadosList = new ArrayList<>();
         for (Comprobante comprobante : comprobante) {
@@ -131,6 +147,14 @@ public class MarshallCFDI {
             emisores.add(comprobante.getEmisor());
         }
         return emisores;
+    }
+
+    public List<String> obtenerREgimenFiscal(){
+        List<String> lista = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            lista.add(comprobante.getEmisor().getRegimenFiscal());
+        }
+        return lista;
     }
 
     public List<Receptor> obtenerReceptores() {

@@ -16,41 +16,22 @@ public class valTipoComprobante {
         this.marshallCFDI = marshallCFDI;
     }
     
-    /*public String validarTipoComprobante() {
-        StringBuilder tipoComprobantes = new StringBuilder();
+    public List<String> validarTipoComprobante() {
         
+        List<String> listaTipos = new ArrayList<>();
+        String validado;
         for (String comprobante : marshallCFDI.obtenerTiposDeComprobante()) {
             String tipo = comprobante;
-            switch (tipo) {
-                case "I":
-                    tipoComprobantes.append("Ingreso, ");
-                    break;
-                case "E":
-                    tipoComprobantes.append("Egreso, ");
-                    break;
-                case "T":
-                    tipoComprobantes.append("Traslado, ");
-                    break;
-                case "N":
-                    tipoComprobantes.append("Nómina, ");
-                    break;
-                case "P":
-                    tipoComprobantes.append("Pago, ");
-                    break;
-                default:
-                    tipoComprobantes.append("Tipo de comprobante no válido, ");
-                    break;
+            if(tipo.equals("I") || tipo.equals("E")|| tipo.equals("T") || tipo.equals("N") || tipo.equals("P")){
+                validado = "Válido";
+            }else{
+                validado = "No válido " + CodigoError.CFDI40121;
             }
+            listaTipos.add(validado);
         }
+        return null;
         
-        // Eliminar la última coma y el espacio
-        if (tipoComprobantes.length() > 0) {
-            tipoComprobantes.delete(tipoComprobantes.length() - 2, tipoComprobantes.length());
-        }
-        
-        return tipoComprobantes.toString();
-    }
-*/
+    }  
     public List<String> validarValidezCFDI() {
     List<String> listaValidacion = new ArrayList<>();
     

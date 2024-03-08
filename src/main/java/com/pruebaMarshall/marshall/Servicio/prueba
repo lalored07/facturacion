@@ -23,3 +23,12 @@ public List<Comprobante> devolverDatosXml() {
         }
         return comprobantes;
     }
+
+
+    for (String formaPago : listaFormaPago) {
+        Matcher matcher99 = pattern99.matcher(formaPago);
+        if (matcher99.find()) { 
+            validado = true; 
+            break;
+        }
+    }

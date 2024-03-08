@@ -1,5 +1,6 @@
 package com.pruebaMarshall.marshall.Servicio.Validaciones;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,8 @@ public class validacionCompleta {
     @Autowired 
     private valMoneda valMoneda;
     @Autowired
+    private valFormaPago valFormaPago;
+    @Autowired
     private MarshallCFDI marshallCFDI;
     private xmlServicio xmlServicio;
     private List<Comprobante> comprobantes;
@@ -43,10 +46,8 @@ public class validacionCompleta {
 
     public Map<String, Object> validar() {
         Map<String, Object> mapa = new LinkedHashMap<>();
-       
         for (int i = 0; i < marshallCFDI.obtenerNombres().size(); i++) {
-            Map<String, String> mapaValidacion = new LinkedHashMap<>();
-            
+            Map<String, Object> mapaValidacion = new LinkedHashMap<>();
             mapaValidacion.put("Exportacion", valExportacion.validarExportacion().get(i));
             mapaValidacion.put("TipoDeComprobante", valTipoComprobante.validarValidezCFDI().get(i));
             mapaValidacion.put("SubTotal", valSubtotal.validarSubTotal().get(i));
@@ -56,8 +57,10 @@ public class validacionCompleta {
             mapaValidacion.put("Version", valVersion.validarVersion().get(i));
             mapaValidacion.put("Fecha", valFecha.validarFecha().get(i));
             mapaValidacion.put("Moneda", valMoneda.validarMoneda().get(i));
+            mapaValidacion.put("FormaPago", valFormaPago.agregarMapa().get(i));
             mapa.put(marshallCFDI.obtenerNombres().get(i), mapaValidacion);
         }
         return mapa;
     }
+   
 }
