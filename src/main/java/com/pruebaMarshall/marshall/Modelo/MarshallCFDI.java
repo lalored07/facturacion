@@ -149,6 +149,14 @@ public class MarshallCFDI {
         return emisores;
     }
 
+    public List<String> obtenerDescuentos(){
+        List<String> descuentos = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            descuentos.add(comprobante.getDescuento());
+        }
+        return descuentos;
+    }
+
     public List<String> obtenerREgimenFiscal(){
         List<String> lista = new ArrayList<>();
         for (Comprobante comprobante : comprobante) {

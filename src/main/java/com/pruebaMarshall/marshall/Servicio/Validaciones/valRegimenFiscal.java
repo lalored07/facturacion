@@ -2,6 +2,7 @@ package com.pruebaMarshall.marshall.Servicio.Validaciones;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,8 @@ public class valRegimenFiscal {
     }
 
    
-
+    public List<LinkedHashMap<String, String>> devolverMapa(){
+        
+        return null;
+    }
 }

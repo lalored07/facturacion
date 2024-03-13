@@ -35,6 +35,8 @@ public class validacionCompleta {
     @Autowired
     private valFormaPago valFormaPago;
     @Autowired
+    private valDescuento valDescuento;
+    @Autowired
     private MarshallCFDI marshallCFDI;
     private xmlServicio xmlServicio;
     private List<Comprobante> comprobantes;
@@ -44,8 +46,10 @@ public class validacionCompleta {
         this.comprobantes = xmlServicio.devolverDatosXml();
     }
 
-    public Map<String, Object> validar() {
+    public Map<String, Object> validar() throws IllegalArgumentException, IllegalAccessException {
         Map<String, Object> mapa = new LinkedHashMap<>();
+     
+        
         for (int i = 0; i < marshallCFDI.obtenerNombres().size(); i++) {
             Map<String, Object> mapaValidacion = new LinkedHashMap<>();
             mapaValidacion.put("Exportacion", valExportacion.validarExportacion().get(i));
@@ -58,6 +62,7 @@ public class validacionCompleta {
             mapaValidacion.put("Fecha", valFecha.validarFecha().get(i));
             mapaValidacion.put("Moneda", valMoneda.validarMoneda().get(i));
             mapaValidacion.put("FormaPago", valFormaPago.agregarMapa().get(i));
+            mapaValidacion.put("Descuento", valDescuento.devolverMapa().get(i));
             mapa.put(marshallCFDI.obtenerNombres().get(i), mapaValidacion);
         }
         return mapa;

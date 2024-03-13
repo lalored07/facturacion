@@ -21,7 +21,7 @@ public class FacturacionController {
     }
 
     @GetMapping("/validarFactura")
-    public Map<String,Object> validarTipoFactura() {
+    public Map<String,Object> validarTipoFactura() throws IllegalArgumentException, IllegalAccessException {
        return validacionCompleta.validar();
     }
     
