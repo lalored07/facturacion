@@ -95,8 +95,6 @@ public class valDescuento {
                 if (atributoMoneda.equals(moneda)) {
                     monedaEncontrada = true;
                     int numeroDecimal = Integer.parseInt(mapaMonedaDecimal.get(moneda));
-                    boolean esValido = true; 
-    
                     for (int numero : puntosDecimales) {
                         if (numero <= numeroDecimal) {
                             validado = "Válido";

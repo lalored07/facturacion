@@ -1,8 +1,10 @@
 package com.pruebaMarshall.marshall.Modelo;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.aspectj.weaver.patterns.ArgsAnnotationPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,6 +117,14 @@ public class MarshallCFDI {
         return monedas;
     }
 
+    public List<String> obtenerLugarExpedicion(){
+        List<String> lugarExpedicion = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            lugarExpedicion.add(comprobante.getLugarExpedicion());
+        }
+        return lugarExpedicion;
+    }
+
     public List<String> obtenerFormaPago(){
         List<String> formaPago = new ArrayList<>();
         for (Comprobante comprobante: comprobante) {
@@ -139,7 +149,13 @@ public class MarshallCFDI {
         return cfdiRelacionadosList;
     }
 
-
+    public List<String> obtenerTipoRelacion(){
+        List<String> tipoRelacion = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            tipoRelacion.add(comprobante.getCfdiRelacionados().getTipoRelacion());
+        }
+        return tipoRelacion;
+    }
 
     public List<Emisor> obtenerEmisores() {
         List<Emisor> emisores = new ArrayList<>();
@@ -157,10 +173,18 @@ public class MarshallCFDI {
         return descuentos;
     }
 
-    public List<String> obtenerREgimenFiscal(){
+    public List<String> obtenerRegimenFiscalEmisor(){
         List<String> lista = new ArrayList<>();
         for (Comprobante comprobante : comprobante) {
             lista.add(comprobante.getEmisor().getRegimenFiscal());
+        }
+        return lista;
+    }
+
+    public List<String> obtenerRegimenFiscalReceptor(){
+        List<String> lista = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            lista.add(comprobante.getReceptor().getRegimenFiscalReceptor());
         }
         return lista;
     }
@@ -173,6 +197,38 @@ public class MarshallCFDI {
         return receptores;
     }
 
+    public List<String> obtenerNombresReceptores(){
+        List<String> nombresReceptores = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            nombresReceptores.add(comprobante.getReceptor().getNombre());
+        }
+        return nombresReceptores;
+    }
+
+    public List<String> obtenerRfcReceptor(){
+        List<String> rfcReceptor = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            rfcReceptor.add(comprobante.getReceptor().getRfc());
+        }
+        return rfcReceptor;
+    }
+
+    public List<String> obtenerDomicilioFiscalReceptor(){
+        List<String> domicilioFiscal = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            domicilioFiscal.add(comprobante.getReceptor().getDomicilioFiscalReceptor());
+        }
+        return domicilioFiscal;
+    }
+
+    public List<String> obtenerUsoCfdi(){
+        List<String> listaUsoCfdi = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            listaUsoCfdi.add(comprobante.getReceptor().getUsoCFDI());
+        }
+        return listaUsoCfdi;
+    }
+
     public List<Conceptos> obtenerConceptos() {
         List<Conceptos> conceptosList = new ArrayList<>();
         for (Comprobante comprobante : comprobante) {
@@ -180,6 +236,140 @@ public class MarshallCFDI {
         }
         return conceptosList;
     }
+
+    public List<List<String>> obtenerValorUnitario(){
+        List<Conceptos> conceptosList = new ArrayList<>();
+        List<List<String>> listaValorUnitario = new ArrayList<>();
+        
+        for (Comprobante comprobante : comprobante) {
+            conceptosList.add(comprobante.getConceptos());
+        }
+        
+   
+        for (Conceptos conceptos : conceptosList) {
+            List<Concepto> conceptoList = conceptos.getConcepto();
+            List<String> valorUnitario = new ArrayList<>();
+            for (Concepto concepto : conceptoList) {
+                valorUnitario.add(concepto.getValorUnitario());
+            }
+            listaValorUnitario.add(valorUnitario);
+        }
+        
+        return listaValorUnitario;
+    }
+
+    public List<List<String>> obtenerObjetoImp(){
+        List<Conceptos> conceptosList = new ArrayList<>();
+        List<List<String>> listaObjetoImp = new ArrayList<>();
+        
+        for (Comprobante comprobante : comprobante) {
+            conceptosList.add(comprobante.getConceptos());
+        }
+        
+   
+        for (Conceptos conceptos : conceptosList) {
+            List<Concepto> conceptoList = conceptos.getConcepto();
+            List<String> objetoImp = new ArrayList<>();
+            for (Concepto concepto : conceptoList) {
+                objetoImp.add(concepto.getObjetoImp());
+            }
+            listaObjetoImp.add(objetoImp);
+        }
+        
+        return listaObjetoImp;
+    }
+
+    public List<List<Impuestos>> obtenerConceptoImpuestos(){
+        
+        List<Conceptos> conceptosList = new ArrayList<>();
+        List<List<Impuestos>> listaObjetoImp = new ArrayList<>();
+        for (Comprobante comprobante : comprobante) {
+            conceptosList.add(comprobante.getConceptos());
+        }
+        
+   
+        for (Conceptos conceptos : conceptosList) {
+            List<Concepto> conceptoList = conceptos.getConcepto();
+            List<Impuestos> objetoImp = new ArrayList<>();
+            
+            for (Concepto concepto : conceptoList) {
+                objetoImp.add(concepto.getImpuestos());
+            }
+            listaObjetoImp.add(objetoImp);
+        }
+        return listaObjetoImp;
+    }
+
+    public List<List<String>> obtenerConceptoImpuestosTraslado(){
+        
+        List<Conceptos> conceptosList = new ArrayList<>();
+        List<List<String>> listaObjetoImp = new ArrayList<>();
+
+        for (Comprobante comprobante : comprobante) {
+            conceptosList.add(comprobante.getConceptos());
+        }
+        
+   
+        for (Conceptos conceptos : conceptosList) {
+            List<Concepto> conceptoList = conceptos.getConcepto();
+            List<String> objetoImp = new ArrayList<>();
+            
+            for (Concepto concepto : conceptoList) {
+                objetoImp.add(concepto.getImpuestos().getTraslados().getTraslado().getBase());
+            }
+            listaObjetoImp.add(objetoImp);
+        }
+        return listaObjetoImp;
+    }
+
+    public List<List<String>> obtenerListasClaveUnidad() {
+        List<Conceptos> conceptosList = new ArrayList<>();
+        List<List<String>> listaClaveUnidad = new ArrayList<>();
+        
+        for (Comprobante comprobante : comprobante) {
+            conceptosList.add(comprobante.getConceptos());
+        }
+        
+   
+        for (Conceptos conceptos : conceptosList) {
+            List<Concepto> conceptoList = conceptos.getConcepto();
+            List<String> claveUnidad = new ArrayList<>();
+            for (Concepto concepto : conceptoList) {
+                claveUnidad.add(concepto.getClaveUnidad());
+            }
+            listaClaveUnidad.add(claveUnidad);
+        }
+        
+        return listaClaveUnidad;
+    }
+    
+    public List<List<String>> obtenerClaveProdServ(){
+        List<Conceptos> conceptosList = new ArrayList<>();
+        List<List<String>> listaClaveProdServ = new ArrayList<>();
+        
+        for (Comprobante comprobante : comprobante) {
+            conceptosList.add(comprobante.getConceptos());
+        }
+
+        for (Conceptos conceptos : conceptosList) {
+            List<Concepto> conceptoList = conceptos.getConcepto();
+            List<String> claveProdServ = new ArrayList<>();
+            for (Concepto concepto : conceptoList) {
+                claveProdServ.add(concepto.getClaveProdServ());
+            }
+            listaClaveProdServ.add(claveProdServ);
+        }
+        return listaClaveProdServ;
+    }
+    
+    
+    
+    
+    
+    
+    
+
+
 
     public List<Impuestos> obtenerImpuestos() {
         List<Impuestos> impuestosList = new ArrayList<>();

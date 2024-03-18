@@ -38,7 +38,7 @@ public class valTipoComprobante {
     for (String comprobante : marshallCFDI.obtenerTiposDeComprobante()) {
         String tipo = comprobante;
         boolean resultado = tipo.equals("I") || tipo.equals("E") || tipo.equals("T") || tipo.equals("N") || tipo.equals("P");
-        String validado = "No válido, error: " + CodigoError.CFDI40202;
+        String validado = "No válido, error: " + CodigoError.CFDI40121;
             if(resultado){
                 validado = "Válido";
             }

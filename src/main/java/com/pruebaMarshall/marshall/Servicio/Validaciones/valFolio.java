@@ -30,7 +30,7 @@ public class valFolio {
         if (resultado) {
             validado = "Válido";
         } else {
-            validado =  "No válido, error : " + CodigoError.CFDI40222;
+            validado =  "No válido";
         }
         listaValidacion.add(validado);
         

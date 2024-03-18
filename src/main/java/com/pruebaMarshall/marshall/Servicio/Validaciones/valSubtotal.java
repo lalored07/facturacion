@@ -1,6 +1,7 @@
 package com.pruebaMarshall.marshall.Servicio.Validaciones;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -45,5 +46,37 @@ public class valSubtotal {
 }
 
 
-    
+    public List<String> validarComprobante(){
+        List<String> tipoComprobante = marshallCFDI.obtenerTiposDeComprobante();
+        List<String> subtotales = marshallCFDI.obtenerSubTotales();
+        List<String> listaValida = new ArrayList<>();
+        String validado;
+        for (int i = 0; i<subtotales.size(); i++) {
+            if(tipoComprobante.get(i).equals("T") || tipoComprobante.get(i).equals("P")){
+                if(subtotales.get(i).equals("0") || subtotales.get(i).equals("0.00")){
+                    validado = "Válido";
+                }else{
+                    validado = "No válido. Error " + CodigoError.CFDI40109;
+                }
+            }else{
+                validado = "Válido";
+            }  
+            listaValida.add(validado);
+        }
+        return listaValida;
+    }
+
+    public List<LinkedHashMap<String, String>> devolverMapa(){
+        
+        List<LinkedHashMap<String, String>> lista = new ArrayList<>();
+        List<String> validaComprobante = validarComprobante();
+        List<String> validaSubtotal = validarSubTotal();
+        for(int i = 0; i<validaComprobante.size(); i ++){
+            LinkedHashMap<String, String> mapa = new LinkedHashMap<>();
+            mapa.put("decimales", validaSubtotal.get(i));
+            mapa.put("comprobante t o p", validaComprobante.get(i));
+            lista.add(mapa);
+        }
+        return lista;
+    }
 }

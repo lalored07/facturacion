@@ -35,23 +35,53 @@ public class valRegimenFiscal {
 
     public List<String> validarRegimenFiscal(){
         List<String> listaObtenida = obtenerRegimenFiscal();
-        List<String> listaRegimenFiscal = marshallCFDI.obtenerREgimenFiscal();
-        List<String> final1 = new ArrayList<>();
-        String validado;
-        for (String string : listaRegimenFiscal) {
-            if(string.equals("a")){
-                validado = "Valido";
-            }else{
-                validado = "No valido " + CodigoError.CFDI40182;
+        List<String> listaRegimenFiscal = marshallCFDI.obtenerRegimenFiscalReceptor();
+        List<String> regimenFiscalValidado = new ArrayList<>();
+
+        for (String regimenReal : listaRegimenFiscal) {
+            boolean encontrado= false;
+            for (String listaRegimen : listaObtenida) {
+                if(listaRegimen.equals(regimenReal)){
+                    encontrado = true;
+                    break;
             }
-            final1.add(validado);
+            
         }
-        return final1;
+        regimenFiscalValidado.add(encontrado? "Válido" : "No válido" + CodigoError.CFDI40140 );
+    }
+    return regimenFiscalValidado;
+}
+   
+    public List<String> valorRegimenFiscal(){
+        List<String> listaValida = new ArrayList<>();
+        List<String> listaRfc = marshallCFDI.obtenerRfcReceptor();
+        List<String> listaRegimenFiscal = marshallCFDI.obtenerRegimenFiscalReceptor();
+        String validado;
+        for (int i = 0; i<listaRfc.size(); i++) {
+            if(listaRfc.get(i).equals("XAXX010101000") || listaRfc.get(i).equals("XEXX010101000")){
+                if(listaRegimenFiscal.get(i).equals("616")){
+                    validado = "Válido";
+                }else{
+                    validado = "No válido. Error " + CodigoError.CFDI40159;
+                }
+                listaValida.add(validado);
+            }
+        }
+        return listaValida;
     }
 
-   
+
     public List<LinkedHashMap<String, String>> devolverMapa(){
+        List<String> catalogoRegimen = validarRegimenFiscal();
+        List<String> regimenFiscal = valorRegimenFiscal();
+        List<LinkedHashMap<String, String>> lista = new ArrayList<>();
         
-        return null;
+        for(int i = 0; i<catalogoRegimen.size(); i++){
+            LinkedHashMap<String, String> mapa = new LinkedHashMap<>();
+            mapa.put("c_regimenFiscal", catalogoRegimen.get(i));
+            mapa.put("rfcREceptor", regimenFiscal.get(i));
+            lista.add(mapa);
+        }
+        return lista;
     }
 }
