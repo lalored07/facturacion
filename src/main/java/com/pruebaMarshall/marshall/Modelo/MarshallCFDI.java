@@ -3,6 +3,7 @@ package com.pruebaMarshall.marshall.Modelo;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Objects;
 
 import org.aspectj.weaver.patterns.ArgsAnnotationPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -300,27 +301,94 @@ public class MarshallCFDI {
         return listaObjetoImp;
     }
 
-    public List<List<String>> obtenerConceptoImpuestosTraslado(){
-        
-        List<Conceptos> conceptosList = new ArrayList<>();
-        List<List<String>> listaObjetoImp = new ArrayList<>();
+    public List<List<String>> obtenerConceptoImpuestosTrasladoBase() {
+    List<Conceptos> conceptosList = new ArrayList<>();
+    List<List<String>> listaObjetoImp = new ArrayList<>();
 
-        for (Comprobante comprobante : comprobante) {
-            conceptosList.add(comprobante.getConceptos());
+    for (Comprobante comprobante : comprobante) {
+        conceptosList.add(comprobante.getConceptos());
+    }
+
+    for (Conceptos conceptos : conceptosList) {
+        List<Concepto> conceptoList = conceptos.getConcepto();
+        List<String> objetoImp = new ArrayList<>();
+
+        for (Concepto concepto : conceptoList) {
+            Impuestos impuestos = concepto.getImpuestos();
+            if (impuestos != null) {
+                Traslados traslados = impuestos.getTraslados();
+                if (traslados != null) {
+                    Traslado traslado = traslados.getTraslado();
+                    if (traslado != null) {
+                        String base = traslado.getBase();
+                        if (base != null) {
+                            objetoImp.add(base);
+                        } else {
+                            objetoImp.add("Valor no disponible");
+                        }
+                    } else {
+                        objetoImp.add("Traslado no disponible");
+                    }
+                } else {
+                    objetoImp.add("Traslados no disponibles");
+                }
+            } else {
+                objetoImp.add("Impuestos no disponibles");
+            }
         }
         
-   
-        for (Conceptos conceptos : conceptosList) {
-            List<Concepto> conceptoList = conceptos.getConcepto();
-            List<String> objetoImp = new ArrayList<>();
-            
-            for (Concepto concepto : conceptoList) {
-                objetoImp.add(concepto.getImpuestos().getTraslados().getTraslado().getBase());
-            }
+        boolean allNull = objetoImp.stream().allMatch(Objects::isNull);
+        if (!allNull) {
             listaObjetoImp.add(objetoImp);
         }
-        return listaObjetoImp;
     }
+    return listaObjetoImp;
+}
+
+public List<List<String>> obtenerConceptoImpuestosTrasladoImpuesto() {
+    List<Conceptos> conceptosList = new ArrayList<>();
+    List<List<String>> listaObjetoImp = new ArrayList<>();
+
+    for (Comprobante comprobante : comprobante) {
+        conceptosList.add(comprobante.getConceptos());
+    }
+
+    for (Conceptos conceptos : conceptosList) {
+        List<Concepto> conceptoList = conceptos.getConcepto();
+        List<String> objetoImp = new ArrayList<>();
+
+        for (Concepto concepto : conceptoList) {
+            Impuestos impuestos = concepto.getImpuestos();
+            if (impuestos != null) {
+                Traslados traslados = impuestos.getTraslados();
+                if (traslados != null) {
+                    Traslado traslado = traslados.getTraslado();
+                    if (traslado != null) {
+                        String base = traslado.getImpuesto();
+                        if (base != null) {
+                            objetoImp.add(base);
+                        } else {
+                            objetoImp.add("Valor no disponible");
+                        }
+                    } else {
+                        objetoImp.add("Traslado no disponible");
+                    }
+                } else {
+                    objetoImp.add("Traslados no disponibles");
+                }
+            } else {
+                objetoImp.add("Impuestos no disponibles");
+            }
+        }
+        
+        boolean allNull = objetoImp.stream().allMatch(Objects::isNull);
+        if (!allNull) {
+            listaObjetoImp.add(objetoImp);
+        }
+    }
+    return listaObjetoImp;
+}
+
 
     public List<List<String>> obtenerListasClaveUnidad() {
         List<Conceptos> conceptosList = new ArrayList<>();
