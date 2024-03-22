@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pruebaMarshall.marshall.Servicio.xmlServicio;
+import com.pruebaMarshall.marshall.Servicio.Cliente.procesarPath;
 
 @Service
 public class MarshallCFDI {
     private final xmlServicio xmlService;
     private final List<Comprobante> comprobante;
-
+ 
     
     public MarshallCFDI(xmlServicio xmlService) {
         this.xmlService = xmlService;
@@ -364,20 +365,20 @@ public List<List<String>> obtenerConceptoImpuestosTrasladoImpuesto() {
                 if (traslados != null) {
                     Traslado traslado = traslados.getTraslado();
                     if (traslado != null) {
-                        String base = traslado.getImpuesto();
-                        if (base != null) {
-                            objetoImp.add(base);
+                        String impuesto = traslado.getImpuesto();
+                        if (impuesto != null) {
+                            objetoImp.add(impuesto);
                         } else {
-                            objetoImp.add("Valor no disponible");
+                            objetoImp.add("Nulo");
                         }
                     } else {
-                        objetoImp.add("Traslado no disponible");
+                        objetoImp.add("Nulo");
                     }
                 } else {
-                    objetoImp.add("Traslados no disponibles");
+                    objetoImp.add("Nulos");
                 }
             } else {
-                objetoImp.add("Impuestos no disponibles");
+                objetoImp.add("Nulo");
             }
         }
         

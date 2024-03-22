@@ -28,5 +28,12 @@ public class AuthController {
     {
         return ResponseEntity.ok(authService.register(request));
     }
+
+    @PostMapping(value = "login/admin")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginAdmin request)
+    {
+        return ResponseEntity.ok(authService.loginAdmin(request));
+    }
+
 }
 

@@ -39,6 +39,8 @@ public class User implements UserDetails {
     String firstname;
     String country;
     String password;
+    @Column(name = "ruta")
+    String ruta;
     @Enumerated(EnumType.STRING)
     Role role;
 
@@ -66,5 +68,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    
 }
 

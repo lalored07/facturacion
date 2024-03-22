@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pruebaMarshall.marshall.Modelo.Comprobante;
 import com.pruebaMarshall.marshall.Modelo.MarshallCFDI;
+
 import com.pruebaMarshall.marshall.Servicio.xmlServicio;
 
 @Service
@@ -62,9 +63,12 @@ public class validacionCompleta {
     private valConceptoTrasladosBase valConceptoTrasladosBase;
     @Autowired
     private MarshallCFDI marshallCFDI;
+ 
+ 
     private xmlServicio xmlServicio;
     private List<Comprobante> comprobantes;
-    
+
+   
     public validacionCompleta(xmlServicio xmlServicio) {
         this.xmlServicio = xmlServicio;
         this.comprobantes = xmlServicio.devolverDatosXml();
