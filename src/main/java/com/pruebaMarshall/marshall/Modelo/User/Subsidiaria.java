@@ -7,6 +7,7 @@ public class Subsidiaria {
      * Dirección
      * Datos de contacto
      * idFiscal
+     * VCambios
      */
 
 }

@@ -7,6 +7,7 @@ public class Permisos {
      * modulo Fiscal
      * acción Eliminar, Aceptar
      * campos visible o no
+     * VCambios
      */
 
 }
