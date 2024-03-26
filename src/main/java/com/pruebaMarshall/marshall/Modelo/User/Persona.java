@@ -11,7 +11,7 @@ public class Persona {
      * idEmpresa
      * IdSubsidiara
      * 
-     * Cambios
+     * VCambios
      */
 
 }

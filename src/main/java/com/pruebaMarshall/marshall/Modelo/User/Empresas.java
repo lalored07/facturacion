@@ -8,7 +8,7 @@ public class Empresas {
      * dirección Empresa
      * datos contacto(telefono, correo)
      * idFiscal
-     * VCambios
+     * VCambiosVCambios
      */
 
 }

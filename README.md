@@ -6,4 +6,6 @@ Alberto, Fernando y Alan - Fernando, crear la clase para el logeo de toda la apl
 Alan, crear la parte grafica de menus por roles
 Alberto, crear los objetos necesarios para el compoonente de conección a odoo y el login a demas de limpiar el proyecto de todo lo de CFDI
 
+     * VCambios
+
 VCambios

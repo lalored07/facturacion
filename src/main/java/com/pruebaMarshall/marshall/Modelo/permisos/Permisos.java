@@ -8,6 +8,7 @@ public class Permisos {
      * acción Eliminar, Aceptar
      * campos visible o no
      * VCambios
+     * VCambios
      */
 
 }
